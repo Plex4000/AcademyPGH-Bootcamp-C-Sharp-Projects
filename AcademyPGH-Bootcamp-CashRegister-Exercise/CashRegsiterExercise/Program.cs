@@ -10,9 +10,10 @@ namespace CashRegsiterExercise
     {
         public static void Main(string[] args)
         {
+
+            int twenties = 0;
             int hundreds = 0;
             int fifties = 0;
-            int twenties = 0;
             int tens = 0;
             int fives = 0;
             int ones = 0;
@@ -29,50 +30,257 @@ namespace CashRegsiterExercise
             var pay = Convert.ToDecimal(Console.ReadLine());
 
             var change = cost - pay;
-            var randomizeChange = change;
 
             Console.WriteLine("They get $" + change + " in change.");
 
 
-            // $20 bills
+            //Perform some calculations to determine if change ends in a 3
+            var threeEnd = 0m;
+            var wholeDollars = Convert.ToInt32(Math.Floor(change));
+            if (change - wholeDollars != 0)
+            {
+                threeEnd = ((change - wholeDollars) - .03m) % 10;
+            }
+            else if (change - wholeDollars == 0)
+            {
+                threeEnd = (change - 3) % 10;
+            }
 
-            twenties = CalculateDenominations(change, 20);
-            change = change - twenties * 20;
+            //if threeEnd is greater than 0 then the change does not end in a 3. So, give non-randomized denominations in change
+            if (threeEnd > 0)
+            {
+                // $100 bills
 
-            //$10 bills
+                hundreds = CalculateDenominations(change, 100);
+                change = change - hundreds * 100;
 
-            tens = CalculateDenominations(change, 10);
-            change = change - tens * 10;
+                // $50 bills
 
-            //$5 bills
+                fifties = CalculateDenominations(change, 50);
+                change = change - fifties * 50;
 
-            fives = CalculateDenominations(change, 5);
-            change = change - fives * 5;
+                // $20 bills
 
-            //1$ bills
+                twenties = CalculateDenominations(change, 20);
+                change = change - twenties * 20;
 
-            ones = Convert.ToInt32(Math.Floor(change));
-            change = change - ones;
+                //$10 bills
 
-            //Quarters
-            quarters = CalculateDenominations(change, .25);
-            change = change - quarters * Convert.ToDecimal(.25);
+                tens = CalculateDenominations(change, 10);
+                change = change - tens * 10;
 
-            //Dimes
+                //$5 bills
 
-            dimes = CalculateDenominations(change, .10);
-            change = change - dimes * Convert.ToDecimal(.10);
+                fives = CalculateDenominations(change, 5);
+                change = change - fives * 5;
 
-            //Nickles
+                //1$ bills
 
-            nickles = CalculateDenominations(change, .05);
-            change = change - nickles * Convert.ToDecimal(.05);
+                ones = Convert.ToInt32(Math.Floor(change));
+                change = change - ones;
 
-            //Pennies
+                //Quarters
+                quarters = CalculateDenominations(change, .25);
+                change = change - quarters * Convert.ToDecimal(.25);
 
-            pennies = Convert.ToInt32(change * 100);
+                //Dimes
+
+                dimes = CalculateDenominations(change, .10);
+                change = change - dimes * Convert.ToDecimal(.10);
+
+                //Nickles
+
+                nickles = CalculateDenominations(change, .05);
+                change = change - nickles * Convert.ToDecimal(.05);
+
+                //Pennies
+
+                pennies = Convert.ToInt32(change * 100);
+
+            }
+
+            /* if threeEnd equals 0 then the change ends in a 3. So, give randomized denominations in change 
+               There is repeated code here which can be consolidated into a single method/function, but chose not to 
+               because Zach has not covered functions yet*/
+
+            else if (threeEnd == 0)
+            {
+                int tempValue;
+
+                Random random = new Random();
+
+                while (change > 0)
+                {
+                    //random number of $100 bills
+
+                    tempValue = random.Next(0, hundreds + 10);
+                    if (tempValue * 100 < change)
+                    {
+                        hundreds += tempValue;
+                        change -= tempValue * 100;
+                    }
+                    if (tempValue * 100 == change)
+                    {
+                        hundreds += tempValue;
+                        change = 0;
+                    }
+
+
+                    //random number of $50 bills
+
+                    tempValue = random.Next(0, fifties + 10);
+                    if (tempValue * 50 < change)
+                    {
+                        fifties += tempValue;
+                        change -= tempValue * 50;
+                    }
+                    if (tempValue * 50 == change)
+                    {
+                        fifties += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of $20 bills
+
+                    tempValue = random.Next(0, twenties + 10);
+                    if (tempValue * 20 < change)
+                    {
+                        twenties += tempValue;
+                        change -= tempValue * 20;
+                    }
+                    if (tempValue * 20 == change)
+                    {
+                        twenties += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of $10 bills
+
+                    tempValue = random.Next(0, tens + 10);
+                    if (tempValue * 10 < change)
+                    {
+                        tens += tempValue;
+                        change -= tempValue * 10;
+                    }
+                    if (tempValue * 10 == change)
+                    {
+                        tens += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of $5 bills
+
+                    tempValue = random.Next(0, fives + 10);
+                    if (tempValue * 5 < change)
+                    {
+                        fives += tempValue;
+                        change -= tempValue * 5;
+                    }
+
+                    if (tempValue * 5 == change)
+                    {
+                        fives += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of $1 bills
+
+                    tempValue = random.Next(0, ones + 10);
+                    if (tempValue * 1 < change)
+                    {
+                        ones += tempValue;
+                        change -= tempValue * 1;
+                    }
+
+                    if (tempValue * 1 == change)
+                    {
+                        ones += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of quarters
+
+                    tempValue = random.Next(0, quarters + 10);
+                    if (tempValue * .25m < change)
+                    {
+                        quarters += tempValue;
+                        change -= tempValue * .25m;
+                    }
+                    if (tempValue * .25m == change)
+                    {
+                        quarters += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of dimes
+
+                    tempValue = random.Next(0, dimes + 10);
+                    if (tempValue * .10m < change)
+                    {
+                        dimes += tempValue;
+                        change -= tempValue * .10m;
+                    }
+
+                    if (tempValue * .10m == change)
+                    {
+                        dimes += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of nickles
+
+                    tempValue = random.Next(0, nickles + 10);
+                    if (tempValue * .05m < change)
+                    {
+                        nickles += tempValue;
+                        change -= tempValue * .05m;
+                    }
+
+                    if (tempValue * .05m == change)
+                    {
+                        nickles += tempValue;
+                        change = 0;
+                    }
+
+                    //random number of pennies
+
+                    tempValue = random.Next(0, pennies + 10);
+                    if (tempValue * .01m < change)
+                    {
+                        pennies += tempValue;
+                        change -= tempValue * .01m;
+                    }
+
+                    if (tempValue * .01m == change)
+                    {
+                        pennies += tempValue;
+                        change = 0;
+                    }
+
+
+
+                }
+            }
 
             //Print out the change in denominations
+
+            if (hundreds == 1)
+            {
+                Console.Write(hundreds + " hundred, ");
+            }
+            else if (hundreds > 1)
+            {
+                Console.Write(hundreds + " hundreds, ");
+            }
+
+            if (fifties == 1)
+            {
+                Console.Write(fifties + " fifty, ");
+            }
+            else if (fifties > 1)
+            {
+                Console.Write(fifties + " fifties, ");
+            }
 
             if (twenties == 1)
             {
@@ -146,188 +354,7 @@ namespace CashRegsiterExercise
                 Console.Write(pennies + " pennies");
             }
 
-            Console.WriteLine();
-
-            //Bonus: Randomize change denomination output
-            Console.WriteLine();
-
-            int randNumOf20s = 0, randNumOf10s = 0, randNumOf5s = 0, randNumOf1s = 0, randNumOfQuarters = 0, randNumOfDimes = 0, randNumOfNickles = 0, randNumOfPennies = 0, tempValue, loopCount = 1, randNum;
-            Random random = new Random();
-
-
-            while (true)
-            {
-                randNum = random.Next(1, 9);
-
-                switch (randNum)
-                {
-                    case 1:
-                        if (twenties != 0)
-                        {
-                            if (randomizeChange - 20 >= 0)
-                            {
-                                randomizeChange = randomizeChange - 20;
-                                randNumOf20s++;
-                            }
-                        }
-                        break;
-                    case 2:
-                        if (tens != 0)
-                        {
-                            if (randomizeChange - 10 >= 0)
-                            {
-                                randomizeChange = randomizeChange - 10;
-                                randNumOf10s++;
-                            }
-
-                        }
-                        break;
-                    case 3:
-                        if (fives != 0)
-                        {
-                            if (randomizeChange - 5 >= 0)
-                            {
-                                randomizeChange = randomizeChange - 5;
-                                randNumOf5s++;
-                            }
-
-
-                        }
-                        break;
-                    case 4:
-                        if (ones != 0)
-                        {
-                            if (randomizeChange - 1 >= 0)
-                            {
-                                randomizeChange = randomizeChange - 1;
-                                randNumOf1s++;
-                            }
-
-                        }
-                        break;
-                    case 5:
-                        if (quarters != 0)
-                        {
-                            if (randomizeChange - .25m >= 0)
-                            {
-                                randomizeChange = randomizeChange - .25m;
-                                randNumOfQuarters++;
-                            }
-
-                        }
-                        break;
-                    case 6:
-                        if (dimes != 0)
-                        {
-                            if (randomizeChange - .10m >= 0)
-                            {
-                                randomizeChange = randomizeChange - .10m;
-                                randNumOfDimes++;
-                            }
-
-                        }
-                        break;
-                    case 7:
-                        if (nickles != 0)
-                        {
-                            if (randomizeChange - .05m >= 0)
-                            {
-                                randomizeChange = randomizeChange - .05m;
-                                randNumOfNickles++;
-                            }
-
-                        }
-                        break;
-                    case 8:
-                        if (pennies != 0)
-                        {
-                            if (randomizeChange - .01m >= 0)
-                            {
-                                randomizeChange = randomizeChange - .01m;
-                                randNumOfPennies++;
-                            }
-
-                        }
-                        break;
-
-                }
-
-                if (randomizeChange == 0) { break; }
-            }
-
-
-            if (randNumOf20s == 1)
-            {
-                Console.Write(randNumOf20s + " twenty, ");
-            }
-            else if (randNumOf20s > 1)
-            {
-                Console.Write(randNumOf20s + " twenties, ");
-            }
-
-            if (randNumOf10s == 1)
-            {
-                Console.Write(randNumOf10s + " ten, ");
-            }
-            else if (randNumOf10s > 1)
-            {
-                Console.Write(randNumOf10s + " tens, ");
-            }
-
-            if (randNumOf5s == 1)
-            {
-                Console.Write(randNumOf5s + " five, ");
-            }
-            else if (randNumOf5s > 1)
-            {
-                Console.Write(randNumOf5s + " fives, ");
-            }
-
-            if (randNumOf1s == 1)
-            {
-                Console.Write(randNumOf1s + " one, ");
-            }
-            else if (randNumOf1s > 1)
-            {
-                Console.Write(randNumOf1s + " ones, ");
-            }
-
-            if (randNumOfQuarters == 1)
-            {
-                Console.Write(randNumOfQuarters + " quarter, ");
-            }
-            if (randNumOfQuarters > 1)
-            {
-                Console.Write(randNumOfQuarters + " quarters, ");
-            }
-
-            if (randNumOfDimes == 1)
-            {
-                Console.Write(randNumOfDimes + " dime, ");
-            }
-            if (randNumOfDimes > 1)
-            {
-                Console.Write(randNumOfDimes + " dimes, ");
-            }
-
-            if (randNumOfNickles == 1)
-            {
-                Console.Write(randNumOfNickles + " nickle, ");
-            }
-            if (randNumOfNickles > 1)
-            {
-                Console.Write(randNumOfNickles + " nickles, ");
-            }
-
-            if (randNumOfPennies == 1)
-            {
-                Console.Write(randNumOfPennies + " penny");
-            }
-            if (randNumOfPennies > 1)
-            {
-                Console.Write(randNumOfPennies + " pennies");
-            }
-
+            Console.ReadLine();
         }
         public static int CalculateDenominations(decimal change, double baseDenomination)
         {
@@ -345,6 +372,7 @@ namespace CashRegsiterExercise
 
             return numOfDenomination;
         }
+
     }
-    }
+}
 
