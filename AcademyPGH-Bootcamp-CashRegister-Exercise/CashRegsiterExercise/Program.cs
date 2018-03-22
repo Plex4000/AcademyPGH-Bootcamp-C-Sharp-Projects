@@ -6,10 +6,9 @@ namespace CashRegsiterExercise
     {
         public static void Main(string[] args)
         {
-
-            int twenties = 0;
             int hundreds = 0;
             int fifties = 0;
+            int twenties = 0;
             int tens = 0;
             int fives = 0;
             int ones = 0;
