@@ -17,24 +17,22 @@ namespace CashRegsiterExercise
             int nickles = 0;
             int pennies = 0;
 
-
             Console.Write("How much did it cost? ");
             var cost = Convert.ToDecimal(Console.ReadLine());
 
             Console.Write("How much did they pay? ");
             var pay = Convert.ToDecimal(Console.ReadLine());
 
-            var change = cost - pay;
+            var change = pay - cost;
 
             Console.WriteLine("They get $" + change + " in change.");
-
 
             //Perform some calculations to determine if change ends in a 3
             var threeEnd = 0m;
             var wholeDollars = Convert.ToInt32(Math.Floor(change));
             if (change - wholeDollars != 0)
             {
-                threeEnd = ((change - wholeDollars) - .03m) % 10;
+                threeEnd = (((change - wholeDollars) * 100) - 3) % 10;
             }
             else if (change - wholeDollars == 0)
             {
