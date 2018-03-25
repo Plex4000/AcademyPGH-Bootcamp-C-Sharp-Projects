@@ -26,14 +26,14 @@ namespace BattleShipExercise
 
             while (true)
             {
-                if(shipCount == 0)
+                if (shipCount == 0)
                 {
                     Console.WriteLine("You won the game!");
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Which coordinate do you want to shoot?");
+                    Console.WriteLine("Which coordinate do you want to shoot? example: 0 1");
 
                     string input = Console.ReadLine();
                     string[] inputArray = input.Split();
@@ -47,25 +47,82 @@ namespace BattleShipExercise
                     }
                     else if (shipGrid[intArray[0], intArray[1]] != "*")
                     {
-                        Console.WriteLine("You didn't hit a ship. Try again!");
+                        Console.Write("You didn't hit a ship.");
 
-                        if (shipGrid[intArray[0] - 1, intArray[1]] != null && shipGrid[intArray[0]-1, intArray[1]] == "*")
+
+                        if (intArray[0] == 0 && intArray[1] == 0)
                         {
-                            Console.WriteLine("close!");
-                        }
-                        else if(shipGrid[intArray[0] + 1, intArray[1]] != null && shipGrid[intArray[0] + 1, intArray[1]] == "*")
-                        {
-                            Console.WriteLine("close!");
-                        }
-                        else if (shipGrid[intArray[0], intArray[1] + 1] != null && shipGrid[intArray[0], intArray[1] + 1] == "*")
-                        {
-                            Console.WriteLine("close!");
-                        }
-                        else if (shipGrid[intArray[0] + 1, intArray[1] - 1] != null && shipGrid[intArray[0] + 1, intArray[1] - 1] == "*")
-                        {
-                            Console.WriteLine("close!");
+                            if (shipGrid[intArray[0], intArray[1] + 1] == "*" || shipGrid[intArray[0] + 1, intArray[1]] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
                         }
 
+                        else if (intArray[0] == 0 && intArray[1] == 7)
+                        {
+                            if (shipGrid[intArray[0], intArray[1] - 1] == "*" || shipGrid[intArray[0] + 1, intArray[1]] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
+                        }
+
+                        else if (intArray[0] == 7 && intArray[1] == 0)
+                        {
+                            if (shipGrid[intArray[0] - 1, intArray[1]] == "*" || shipGrid[intArray[0], intArray[1] + 1] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
+                        }
+
+                        else if (intArray[0] == 7 && intArray[1] == 7)
+                        {
+                            if (shipGrid[intArray[0] - 1, intArray[1]] == "*" || shipGrid[intArray[0], intArray[1] - 1] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
+                        }
+
+                        else if (intArray[0] == 0 && intArray[1] != 0 && intArray[1] != 7)
+                        {
+                            if (shipGrid[0, intArray[1] + 1] == "*" || shipGrid[0, intArray[1] - 1] == "*" || shipGrid[1, intArray[1]] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
+                        }
+
+                        else if (intArray[0] == 7 && intArray[1] != 0 && intArray[1] != 7)
+                        {
+                            if (shipGrid[7, intArray[1] - 1] == "*" || shipGrid[7, intArray[1] + 1] == "*" || shipGrid[6, intArray[1]] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
+                        }
+
+                        else if (intArray[1] == 0 && intArray[0] != 0 && intArray[0] != 7)
+                        {
+                            if (shipGrid[intArray[0], 1] == "*" || shipGrid[intArray[0] - 1, 0] == "*" || shipGrid[intArray[0] + 1, 0] == "*")
+                            {
+                                Console.Write(" But you were close!");
+                            }
+                        }
+
+                        else if (intArray[1] == 7 && intArray[0] != 0 && intArray[0] != 7)
+                        {
+                            if (shipGrid[intArray[0], 6] == "*" || shipGrid[intArray[0] - 1, 7] == "*" || shipGrid[intArray[0] + 1, 7] == "*")
+                            {
+                                Console.Write(" But you were close!");
+
+                            }
+                        }
+                        else
+                        {
+                            if (shipGrid[intArray[0] + 1, intArray[0]] == "*" || shipGrid[intArray[0] - 1, intArray[0]] == "*" || shipGrid[intArray[0], intArray[1] + 1]  == "*" || shipGrid[intArray[0], intArray[1] - 1] == "*")
+                            {
+                                Console.Write(" But you were close!");
+
+                            }
+                        }
+                        Console.WriteLine();
                     }
                 }
             }
