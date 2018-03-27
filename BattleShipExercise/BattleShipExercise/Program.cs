@@ -20,26 +20,31 @@ namespace BattleShipExercise
 
             int row;
             int col;
-            for (int i = 0; i < 8; i++)
+            //shipOne = new 
+            for (int i = 1; i <= 4; i++)
             {
+                if (i == 1)
+                {
+                    row = rand.Next(0, 7);
+                    col = rand.Next(0, 7);
+
+                    if (col != 5 && col != 6 && col != 7)
+                    {
+                        shipGrid[row, col] = "*";
+                        shipGrid[row, col + 1] = "*";
+                        shipGrid[row, col + 2] = "*";
+                        shipGrid[row, col + 3] = "*";
+                    }
+                }
+                if (i == 2)
+                {
+                    row = rand.Next(0, 7);
+                    col = rand.Next(0, 7);
+                }
                 row = rand.Next(0, 7);
                 col = rand.Next(0, 7);
                 shipGrid[row, col] = "*";
             }
-
-            //shipGrid[1, 4] = "*";
-            //shipGrid[2, 2] = "*";
-            //shipGrid[2, 3] = "*";
-            //shipGrid[4, 3] = "*";
-            //shipGrid[4, 4] = "*";
-            //shipGrid[5, 0] = "*";
-            //shipGrid[5, 2] = "*";
-            //shipGrid[6, 6] = "*";
-            //shipGrid[6, 7] = "*";
-            //shipGrid[7, 2] = "*";
-            //shipGrid[7, 3] = "*";
-            //shipGrid[7, 4] = "*";
-            //shipGrid[7, 5] = "*";
 
             for (int i = 0; i < 8; i++)
             {
