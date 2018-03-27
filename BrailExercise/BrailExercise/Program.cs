@@ -8,48 +8,141 @@ namespace BrailExercise
 {
     class Program
     {
+        public static string topRow;
+        public static string middleRow;
+        public static string bottomRow;
+
         static void Main(string[] args)
         {
             Console.WriteLine("What is your message?");
             string input = Console.ReadLine().ToLower();
-            //string[] brailAlphabet = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-            string[,,] brailSymbols = new string[,,] { { {".","0" },{"0","0"},{"0", "0"} }, { {".", "0" }, {".","0" }, {"0","0"}}};
 
-            //int x = 0;
-            //while (x < 2)
-            //{
-            //    input = input.Replace(brailAlphabet[x], brailSymbols[x]);
-            //    x++;
-            //}
-
-            //Console.Write(input);
-            string top = "";
-            string middle = "";
-            string bottom = "";
+            string[,,] brailSymbols = new string[,,] 
+            { 
+            { {".","0" },{"0","0"},{"0", "0"} },
+            { {".","0" },{".","0"},{"0", "0"} },
+            { {".","." },{"0","0"},{"0", "0"} },
+            { {".","." },{"0","."},{"0", "0"} },
+            { {".","0" },{"0","."},{"0", "0"} },
+            { {".","." },{".","0"},{"0", "0"} },
+            { {".","." },{".","."},{"0", "0"} },
+            { {".","0" },{".","."},{"0", "0"} },
+            { {"0","." },{".","0"},{"0", "0"} },
+            { {"0","." },{".","."},{"0", "0"} },
+            { {".","0" },{"0","0"},{".", "0"} },
+            { {".","0" },{".","0"},{".", "0"} },
+            { {".","." },{"0","0"},{".", "0"} },
+            { {".","." },{"0","."},{".", "0"} },
+            { {".","0" },{"0","."},{".", "0"} },
+            { {".","." },{".","0"},{".", "0"} },
+            { {".","." },{".","."},{".", "0"} },
+            { {".","0" },{".","."},{".", "0"} },
+            { {"0","." },{".","0"},{".", "0"} },
+            { {"0","." },{".","."},{".", "0"} },
+            { {".","0" },{"0","0"},{".", "."} },
+            { {".","0" },{".","0"},{".", "."} },
+            { {"o","." },{".","."},{"0", "."} },
+            { {".","." },{"0","0"},{".", "."} },
+            { {".","." },{"0","."},{".", "."} },
+            { {".","0" },{"0","."},{".", "."} },
+            };
 
             for (int i = 0;i < input.Count();i++)
             {
-                switch (input[0])
+                switch (input[i])
                 {
                     case 'a':
-                        top = top + brailSymbols[0, 0, 0] + brailSymbols[0, 0, 1];
-                        middle = middle + brailSymbols[0, 1, 0] + brailSymbols[0, 1, 1];
-                        bottom = bottom + brailSymbols[0, 2, 0] + brailSymbols[0, 2, 1];
+                        BuildBrailRows(0, brailSymbols);
                         break;
                     case 'b':
-                        top = top + brailSymbols[1, 0, 0] + brailSymbols[1, 0, 1];
-                        middle = middle + brailSymbols[1, 1, 0] + brailSymbols[1, 1, 1];
-                        bottom = bottom + brailSymbols[1, 2, 0] + brailSymbols[1, 2, 1];
+                        BuildBrailRows(1, brailSymbols);
                         break;
-                    default:
+                    case 'c':
+                        BuildBrailRows(2, brailSymbols);
+                        break;
+                    case 'd':
+                        BuildBrailRows(3, brailSymbols);
+                        break;
+                    case 'e':
+                        BuildBrailRows(4, brailSymbols);
+                        break;
+                    case 'f':
+                        BuildBrailRows(5, brailSymbols);
+                        break;
+                    case 'g':
+                        BuildBrailRows(6, brailSymbols);
+                        break;
+                    case 'h':
+                        BuildBrailRows(7, brailSymbols);
+                        break;
+                    case 'i':
+                        BuildBrailRows(8, brailSymbols);
+                        break;
+                    case 'j':
+                        BuildBrailRows(9, brailSymbols);
+                        break;
+                    case 'k':
+                        BuildBrailRows(10, brailSymbols);
+                        break;
+                    case 'l':
+                        BuildBrailRows(11, brailSymbols);
+                        break;
+                    case 'm':
+                        BuildBrailRows(12, brailSymbols);
+                        break;
+                    case 'n':
+                        BuildBrailRows(13, brailSymbols);
+                        break;
+                    case 'o':
+                        BuildBrailRows(14, brailSymbols);
+                        break;
+                    case 'p':
+                        BuildBrailRows(15, brailSymbols);
+                        break;
+                    case 'q':
+                        BuildBrailRows(16, brailSymbols);
+                        break;
+                    case 'r':
+                        BuildBrailRows(17, brailSymbols);
+                        break;
+                    case 's':
+                        BuildBrailRows(18, brailSymbols);
+                        break;
+                    case 't':
+                        BuildBrailRows(19, brailSymbols);
+                        break;
+                    case 'u':
+                        BuildBrailRows(20, brailSymbols);
+                        break;
+                    case 'v':
+                        BuildBrailRows(21, brailSymbols);
+                        break;
+                    case 'w':
+                        BuildBrailRows(22, brailSymbols);
+                        break;
+                    case 'x':
+                        BuildBrailRows(23, brailSymbols);
+                        break;
+                    case 'y':
+                        BuildBrailRows(24, brailSymbols);
+                        break;
+                    case 'z':
+                        BuildBrailRows(25, brailSymbols);
                         break;
                 }
             }
 
-            Console.WriteLine(top);
-            Console.WriteLine(middle);
-            Console.WriteLine(bottom);
+            Console.WriteLine(topRow);
+            Console.WriteLine(middleRow);
+            Console.WriteLine(bottomRow);
 
+        }
+
+        public static void BuildBrailRows(int brailLetterIndex, string[,,] brailSymbols)
+        {
+            topRow = topRow + brailSymbols[brailLetterIndex, 0, 0] + brailSymbols[brailLetterIndex, 0, 1];
+            middleRow = middleRow + brailSymbols[brailLetterIndex, 1, 0] + brailSymbols[brailLetterIndex, 1, 1];
+            bottomRow = bottomRow + brailSymbols[brailLetterIndex, 2, 0] + brailSymbols[brailLetterIndex, 2, 1];
         }
     }
 }
