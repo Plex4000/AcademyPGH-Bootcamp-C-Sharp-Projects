@@ -21,15 +21,13 @@ namespace BattleShipExercise
 
             int row;
             int col;
-            bool skipCoor = false;
-
 
             //create array for different ship lengths
             int[][,] ships = new int[4][,]
             {
                new int[4,2] { {0,0},{0,0},{0,0},{0,0} },
                new int[3,2] { {0,0},{0,0},{0,0} },
-               new int[2,2] { {0,0}, {0,0} },
+               new int[2,2] { {0,0},{0,0} },
                new int[1,2] { {0,0} }
             };
 
