@@ -23,24 +23,15 @@ namespace BattleShipExercise
             int col;
             bool skipCoor = false;
 
+
             //create array for different ship lengths
-            int[][,] ships = new int[4][,] 
+            int[][,] ships = new int[4][,]
             {
-               new int[4,2] { {0,1},{0,0},{0,0},{0,0} },
+               new int[4,2] { {0,0},{0,0},{0,0},{0,0} },
                new int[3,2] { {0,0},{0,0},{0,0} },
                new int[2,2] { {0,0}, {0,0} },
                new int[1,2] { {0,0} }
             };
-
-            Console.WriteLine(ships[1].GetLength(0));
-
-            for (int i = 0; i < ships.GetLength(0); i++)
-            {
-                for (int j = 0; j < ships[i].GetLength(0); j++)
-                {
-
-                }
-            }
 
             //randomly place ships on grid and populate the ships array
             for (int i = 1; i <= 4; i++)
@@ -79,7 +70,7 @@ namespace BattleShipExercise
                     row = rand.Next(0, 7);
                     col = rand.Next(0, 7);
 
-                    while (col == 6 || col == 7 || GetCoordExistsFirstShip(ships, col, row))
+                    while (col == 6 || col == 7 || GetCoordExistsFirstShip(ships, row))
                     {
                         row = rand.Next(0, 7);
                         col = rand.Next(0, 7);
@@ -107,7 +98,7 @@ namespace BattleShipExercise
                     row = rand.Next(0, 7);
                     col = rand.Next(0, 7);
 
-                    while (col == 7 || GetCoordExistsFirstShip(ships, col, row) || GetCoordExistsSecondShip(ships, col, row))
+                    while (col == 7 || GetCoordExistsFirstShip(ships,row) || GetCoordExistsSecondShip(ships,row))
                     {
                         row = rand.Next(0, 7);
                         col = rand.Next(0, 7);
@@ -129,7 +120,7 @@ namespace BattleShipExercise
                     row = rand.Next(0, 7);
                     col = rand.Next(0, 7);
 
-                    while (GetCoordExistsFirstShip(ships, col, row) || GetCoordExistsSecondShip(ships, col, row) || GetCoordExistsThirdShip(ships, col, row))
+                    while (GetCoordExistsFirstShip(ships,row) || GetCoordExistsSecondShip(ships, row) || GetCoordExistsThirdShip(ships,row))
                     {
                         row = rand.Next(0, 7);
                         col = rand.Next(0, 7);
@@ -153,7 +144,11 @@ namespace BattleShipExercise
                 Console.WriteLine();
             }
 
-            var shipCount = 4;
+            int shipCount = 4;
+            int firstShipHitCount = 0;
+            int secondShipHitCount = 0;
+            int thirdShipHitCount = 0;
+            int fourthShipHitCount = 0;
             //play game
             while (shipCount != 0)
             {
@@ -166,18 +161,67 @@ namespace BattleShipExercise
 
                 if (shipGrid[intArray[0], intArray[1]] == "*")
                 {
-                    Console.WriteLine("Yay! you hit a ship!");
+                    Console.Write("You hit a ship! ");
                     shipGrid[intArray[0], intArray[1]] = "X";
 
-                    if (GetCoordExistsFirstShip(ships, intArray[1], intArray[0]))
+                   
+                    for (int i = 0; i < ships.GetLength(0); i++)
                     {
-                        int index = Array.IndexOf(ships[0], intArray[0]);
-                        
+                        for (int j = 0; j < ships[i].GetLength(0); j++)
+                        {
+                            if (ships[i][j, 0] == intArray[0] && ships[i][j, 1] == intArray[1])
+                            {
+                                if (i == 0)
+                                {
+                                    firstShipHitCount++;
+                                    Console.Write("Ship 1 hit ");
+                                    Console.WriteLine(firstShipHitCount + " times.");
+                                    if (firstShipHitCount == 4)
+                                    {
+                                        Console.WriteLine("You sunk ship 1!");
+                                        shipCount--;
+                                    }
+                                }
 
+                                if (i == 1)
+                                {
+                                    secondShipHitCount++;
+                                    Console.Write("ship 2 hit ");
+                                    Console.WriteLine(secondShipHitCount + " times.");
+                                    if (secondShipHitCount == 3)
+                                    {
+                                        Console.WriteLine("You sunk ship 2!");
+                                        shipCount--;
+                                    }
+                                }
+
+                                if (i == 2)
+                                {
+                                    thirdShipHitCount++;
+                                    Console.Write("ship 3 hit ");
+                                    Console.WriteLine(thirdShipHitCount + " times.");
+                                    if (thirdShipHitCount == 2)
+                                    {
+                                        Console.WriteLine("You sunk ship 3!");
+                                        shipCount--;
+                                    }
+                                }
+
+                                if (i == 3)
+                                {
+                                    fourthShipHitCount++;
+                                    Console.Write("ship 4 hit ");
+                                    Console.WriteLine(fourthShipHitCount + " times.");
+                                    if (fourthShipHitCount == 1)
+                                    {
+                                        Console.WriteLine("You sunk ship 4!");
+                                        shipCount--;
+                                    }
+                                }
+
+                            }
+                        }
                     }
-
-
-                    shipCount--;
 
                     for (int i = 0; i < 8; i++)
                     {
@@ -273,13 +317,13 @@ namespace BattleShipExercise
             Console.WriteLine("You won the game!");
         }
 
-        public static bool GetCoordExistsFirstShip(int[][,] ships, int col, int row)
+        public static bool GetCoordExistsFirstShip(int[][,] ships, int row)
         {
             bool skipCoord = true;
            
                 for (int i = 0; i < ships[0].GetLength(0); i++)
-                {
-                    if (ships[0][i, 1] == col && ships[0][i, 0] == row)
+            {
+                if (ships[0][i, 0] == row)
                     {
                         skipCoord = true;
                     }
@@ -291,13 +335,13 @@ namespace BattleShipExercise
             
             return skipCoord;
         }
-        public static bool GetCoordExistsSecondShip(int[][,] ships, int col, int row)
+        public static bool GetCoordExistsSecondShip(int[][,] ships, int row)
         {
             bool skipCoord = true;
           
                 for (int i = 0; i < ships[1].GetLength(0); i++)
                 {
-                    if (ships[1][i, 1] == col && ships[1][i, 0] == row)
+                    if (ships[1][i, 0] == row)
                     {
                         skipCoord = true;
                     }
@@ -310,13 +354,13 @@ namespace BattleShipExercise
             return skipCoord;
         }
 
-        public static bool GetCoordExistsThirdShip(int[][,] ships, int col, int row)
+        public static bool GetCoordExistsThirdShip(int[][,] ships, int row)
         {
             bool skipCoord = true;
 
             for (int i = 0; i < ships[2].GetLength(0); i++)
             {
-                if (ships[2][i, 1] == col && ships[2][i, 0] == row)
+                if (ships[2][i, 0] == row)
                 {
                     skipCoord = true;
                 }
