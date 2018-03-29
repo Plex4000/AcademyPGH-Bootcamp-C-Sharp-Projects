@@ -22,7 +22,11 @@ namespace BattleShipExercise
             int row;
             int col;
 
+<<<<<<< HEAD
             //create jagged array for different ship lengths
+=======
+            //create array for different ship lengths
+>>>>>>> a9324367fee36e6e0a8effc785f4ecbd3f74d303
             int[][,] ships = new int[4][,]
             {
                new int[4,2] { {0,0},{0,0},{0,0},{0,0} },
