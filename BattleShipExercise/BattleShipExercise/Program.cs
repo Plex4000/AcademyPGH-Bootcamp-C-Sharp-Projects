@@ -21,31 +21,29 @@ namespace BattleShipExercise
 
             int row;
             int col;
-            bool skipCoor = false;
 
-
-            //create array for different ship lengths
+            //create jagged array for different ship lengths
             int[][,] ships = new int[4][,]
             {
                new int[4,2] { {0,0},{0,0},{0,0},{0,0} },
                new int[3,2] { {0,0},{0,0},{0,0} },
-               new int[2,2] { {0,0}, {0,0} },
+               new int[2,2] { {0,0},{0,0} },
                new int[1,2] { {0,0} }
             };
 
-            //randomly place ships on grid and populate the ships array
+            //randomly place ships on grid and populate the ships jagged array
             for (int i = 1; i <= 4; i++)
             {
                 if (i == 1)
                 {
-                    col = rand.Next(0, 7);
+                    col = rand.Next(0, 8);
 
                     while (col == 5 || col == 6 || col == 7)
                     {
-                        col = rand.Next(0, 7);
+                        col = rand.Next(0, 8);
                     }
 
-                    row = rand.Next(0, 7);
+                    row = rand.Next(0, 8);
                     shipGrid[row, col] = "*";
                     shipGrid[row, col + 1] = "*";
                     shipGrid[row, col + 2] = "*";
@@ -67,13 +65,13 @@ namespace BattleShipExercise
 
                 if (i == 2)
                 {
-                    row = rand.Next(0, 7);
-                    col = rand.Next(0, 7);
+                    row = rand.Next(0, 8);
+                    col = rand.Next(0, 8);
 
                     while (col == 6 || col == 7 || GetCoordExistsFirstShip(ships, row))
                     {
-                        row = rand.Next(0, 7);
-                        col = rand.Next(0, 7);
+                        row = rand.Next(0, 8);
+                        col = rand.Next(0, 8);
                     }
 
                     shipGrid[row, col] = "*";
@@ -95,13 +93,13 @@ namespace BattleShipExercise
 
                 if (i == 3)
                 {
-                    row = rand.Next(0, 7);
-                    col = rand.Next(0, 7);
+                    row = rand.Next(0, 8);
+                    col = rand.Next(0, 8);
 
                     while (col == 7 || GetCoordExistsFirstShip(ships,row) || GetCoordExistsSecondShip(ships,row))
                     {
-                        row = rand.Next(0, 7);
-                        col = rand.Next(0, 7);
+                        row = rand.Next(0, 8);
+                        col = rand.Next(0, 8);
                     }
 
 
@@ -117,13 +115,13 @@ namespace BattleShipExercise
 
                 if (i == 4)
                 {
-                    row = rand.Next(0, 7);
-                    col = rand.Next(0, 7);
+                    row = rand.Next(0, 8);
+                    col = rand.Next(0, 8);
 
                     while (GetCoordExistsFirstShip(ships,row) || GetCoordExistsSecondShip(ships, row) || GetCoordExistsThirdShip(ships,row))
                     {
-                        row = rand.Next(0, 7);
-                        col = rand.Next(0, 7);
+                        row = rand.Next(0, 8);
+                        col = rand.Next(0, 8);
                     }
 
                     shipGrid[row, col] = "*";
@@ -158,18 +156,20 @@ namespace BattleShipExercise
                 string input = Console.ReadLine();
                 string[] inputArray = input.Split();
                 int[] intArray = Array.ConvertAll(inputArray, s => int.Parse(s));
+                row = intArray[0];
+                col = intArray[1];
 
-                if (shipGrid[intArray[0], intArray[1]] == "*")
+                if (shipGrid[row, col] == "*")
                 {
                     Console.Write("You hit a ship! ");
-                    shipGrid[intArray[0], intArray[1]] = "X";
+                    shipGrid[row, col] = "X";
 
                    
                     for (int i = 0; i < ships.GetLength(0); i++)
                     {
                         for (int j = 0; j < ships[i].GetLength(0); j++)
                         {
-                            if (ships[i][j, 0] == intArray[0] && ships[i][j, 1] == intArray[1])
+                            if (ships[i][j, 0] == row && ships[i][j, 1] == col)
                             {
                                 if (i == 0)
                                 {
@@ -233,80 +233,80 @@ namespace BattleShipExercise
                     }
 
                 }
-                else if (shipGrid[intArray[0], intArray[1]] != "*")
+                else if (shipGrid[row, col] != "*")
                 {
                     Console.WriteLine("You didn't hit a ship.");
 
 
-                    if (intArray[0] == 0 && intArray[1] == 0)
+                    if (row == 0 && col == 0)
                     {
-                        if (shipGrid[intArray[0], intArray[1] + 1] == "*" || shipGrid[intArray[0] + 1, intArray[1]] == "*")
+                        if (shipGrid[row, col + 1] == "*" || shipGrid[row + 1, col] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[0] == 0 && intArray[1] == 7)
+                    else if (row == 0 && col == 7)
                     {
-                        if (shipGrid[intArray[0], intArray[1] - 1] == "*" || shipGrid[intArray[0] + 1, intArray[1]] == "*")
+                        if (shipGrid[row, col - 1] == "*" || shipGrid[row + 1, col] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[0] == 7 && intArray[1] == 0)
+                    else if (row == 7 && col == 0)
                     {
-                        if (shipGrid[intArray[0] - 1, intArray[1]] == "*" || shipGrid[intArray[0], intArray[1] + 1] == "*")
+                        if (shipGrid[row - 1, col] == "*" || shipGrid[row, col + 1] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[0] == 7 && intArray[1] == 7)
+                    else if (row == 7 && col == 7)
                     {
-                        if (shipGrid[intArray[0] - 1, intArray[1]] == "*" || shipGrid[intArray[0], intArray[1] - 1] == "*")
+                        if (shipGrid[row - 1, col] == "*" || shipGrid[row, col - 1] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[0] == 0 && intArray[1] != 0 && intArray[1] != 7)
+                    else if (row == 0 && col != 0 && col != 7)
                     {
-                        if (shipGrid[0, intArray[1] + 1] == "*" || shipGrid[0, intArray[1] - 1] == "*" || shipGrid[1, intArray[1]] == "*")
+                        if (shipGrid[0, col + 1] == "*" || shipGrid[0, col - 1] == "*" || shipGrid[1, col] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[0] == 7 && intArray[1] != 0 && intArray[1] != 7)
+                    else if (row == 7 && col != 0 && col != 7)
                     {
-                        if (shipGrid[7, intArray[1] - 1] == "*" || shipGrid[7, intArray[1] + 1] == "*" || shipGrid[6, intArray[1]] == "*")
+                        if (shipGrid[7, col - 1] == "*" || shipGrid[7, col + 1] == "*" || shipGrid[6, col] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[1] == 0 && intArray[0] != 0 && intArray[0] != 7)
+                    else if (col == 0 && row != 0 && row != 7)
                     {
-                        if (shipGrid[intArray[0], 1] == "*" || shipGrid[intArray[0] - 1, 0] == "*" || shipGrid[intArray[0] + 1, 0] == "*")
+                        if (shipGrid[row, 1] == "*" || shipGrid[row - 1, 0] == "*" || shipGrid[row + 1, 0] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
                         }
                     }
 
-                    else if (intArray[1] == 7 && intArray[0] != 0 && intArray[0] != 7)
+                    else if (col == 7 && row != 0 && row != 7)
                     {
-                        if (shipGrid[intArray[0], 6] == "*" || shipGrid[intArray[0] - 1, 7] == "*" || shipGrid[intArray[0] + 1, 7] == "*")
+                        if (shipGrid[row, 6] == "*" || shipGrid[row - 1, 7] == "*" || shipGrid[row + 1, 7] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
 
                         }
                     }
                     else
                     {
-                        if (shipGrid[intArray[0] + 1, intArray[0]] == "*" || shipGrid[intArray[0] - 1, intArray[0]] == "*" || shipGrid[intArray[0], intArray[1] + 1] == "*" || shipGrid[intArray[0], intArray[1] - 1] == "*")
+                        if (shipGrid[row + 1, col] == "*" || shipGrid[row - 1, col] == "*" || shipGrid[row, col + 1] == "*" || shipGrid[row, col - 1] == "*")
                         {
-                            Console.Write("But you were close!");
+                            Console.Write("But you were close! ");
 
                         }
                     }
