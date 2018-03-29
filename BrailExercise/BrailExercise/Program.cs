@@ -8,9 +8,9 @@ namespace BrailExercise
 {
     class Program
     {
-        public static string topRow;
-        public static string middleRow;
-        public static string bottomRow;
+        public static string topRow = "";
+        public static string middleRow = "";
+        public static string bottomRow = "";
 
         static void Main(string[] args)
         {
