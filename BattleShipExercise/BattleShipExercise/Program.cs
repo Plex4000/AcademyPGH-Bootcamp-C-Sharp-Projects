@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace BattleShipExercise
 {
@@ -24,8 +23,6 @@ namespace BattleShipExercise
 
 
             //create jagged array for different ship lengths
-
-            //create array for different ship lengths
 
             int[][,] ships = new int[4][,]
             {
