@@ -22,11 +22,11 @@ namespace BattleShipExercise
             int row;
             int col;
 
-<<<<<<< HEAD
+
             //create jagged array for different ship lengths
-=======
+
             //create array for different ship lengths
->>>>>>> a9324367fee36e6e0a8effc785f4ecbd3f74d303
+
             int[][,] ships = new int[4][,]
             {
                new int[4,2] { {0,0},{0,0},{0,0},{0,0} },
@@ -151,6 +151,7 @@ namespace BattleShipExercise
             int secondShipHitCount = 0;
             int thirdShipHitCount = 0;
             int fourthShipHitCount = 0;
+
             //play game
             while (shipCount != 0)
             {
@@ -227,6 +228,7 @@ namespace BattleShipExercise
                         }
                     }
 
+                    //reprint shipgrid
                     for (int i = 0; i < 8; i++)
                     {
                         for (int j = 0; j < 8; j++)
