@@ -45,16 +45,6 @@ namespace BrailExercise
             Console.WriteLine("What is your message?");
             string input = Console.ReadLine().ToLower();
 
-            //validate input to see if it's only letters with regex
-            Regex regexPattern = new Regex(@"^[a-z]+$");
-
-            while (!regexPattern.IsMatch(input))
-            {
-                Console.WriteLine("Please enter only letters: ");
-                Console.WriteLine("What is your message? ");
-                input = Console.ReadLine().ToLower();
-            }
-
             for (int i = 0;i < input.Length;i++)
             {
                 switch (input[i])
