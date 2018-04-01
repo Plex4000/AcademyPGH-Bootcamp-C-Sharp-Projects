@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrailExercise
 {
     class Program
     {
-        public static string topRow;
-        public static string middleRow;
-        public static string bottomRow;
+        public static string topRow = "";
+        public static string middleRow = "";
+        public static string bottomRow = "";
 
         static void Main(string[] args)
         {
-            Console.WriteLine("What is your message?");
-            string input = Console.ReadLine().ToLower();
-
-            string[,,] brailSymbols = new string[,,] 
-            { 
+            //initialize brailsymbols 3D array
+            string[,,] brailSymbols = new string[,,]
+            {
             { {".","0" },{"0","0"},{"0", "0"} },
             { {".","0" },{".","0"},{"0", "0"} },
             { {".","." },{"0","0"},{"0", "0"} },
@@ -44,10 +38,13 @@ namespace BrailExercise
             { {"o","." },{".","."},{"0", "."} },
             { {".","." },{"0","0"},{".", "."} },
             { {".","." },{"0","."},{".", "."} },
-            { {".","0" },{"0","."},{".", "."} },
+            { {".","0" },{"0","."},{".", "."} }
             };
 
-            for (int i = 0;i < input.Count();i++)
+            Console.WriteLine("What is your message?");
+            string input = Console.ReadLine().ToLower();
+
+            for (int i = 0;i < input.Length;i++)
             {
                 switch (input[i])
                 {
@@ -136,6 +133,7 @@ namespace BrailExercise
             Console.WriteLine(middleRow);
             Console.WriteLine(bottomRow);
 
+            Console.ReadLine();
         }
 
         public static void BuildBrailRows(int brailLetterIndex, string[,,] brailSymbols)
