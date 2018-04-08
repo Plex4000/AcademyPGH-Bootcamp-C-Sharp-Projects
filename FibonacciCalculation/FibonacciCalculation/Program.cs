@@ -5,9 +5,7 @@ using System.Linq;
 namespace FibonacciCalculation
 {
     class Program
-    {
-        static List<int> nums = new List<int>();
-        
+    {   
         static void Main(string[] args)
         {
             var result = FibonacciCalculations();
