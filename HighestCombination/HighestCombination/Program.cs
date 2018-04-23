@@ -71,11 +71,13 @@ namespace HighestCombination
 
             }
 
-
+            //convert string array to long datatype array
             long[] finalArray = Array.ConvertAll(combinedList.ToArray(), long.Parse);
 
+            //sort array in ascending order
             Array.Sort(finalArray);
 
+            //return the last number in the array
             return finalArray[finalArray.Length - 1];
 
         }
