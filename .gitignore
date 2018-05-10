@@ -240,7 +240,7 @@ UpgradeLog*.htm
 ServiceFabricBackup/
 
 # SQL Server files
-*.mdf
+#*.mdf
 *.ldf
 *.ndf
 
