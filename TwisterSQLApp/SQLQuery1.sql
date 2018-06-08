@@ -1,0 +1,1 @@
+﻿select * from Tweets inner join Users On Tweets.UserId = Users.Id Where UserName = 'Rubberducky27'

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicLibrarySQLExercise", "MusicLibrarySQLExercise\MusicLibrarySQLExercise.csproj", "{BFF41948-6245-47F9-ACEB-531E518B146B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF41948-6245-47F9-ACEB-531E518B146B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF41948-6245-47F9-ACEB-531E518B146B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF41948-6245-47F9-ACEB-531E518B146B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF41948-6245-47F9-ACEB-531E518B146B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5618D1D6-C729-4D5D-84A7-51FF678AA1E0}
+	EndGlobalSection
+EndGlobal

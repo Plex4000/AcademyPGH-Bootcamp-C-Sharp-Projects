@@ -1,0 +1,1 @@
+﻿ SqlCommand command = new SqlCommand($"select * from Tweets Where UserName = '{userName}'", connection);

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
 namespace SortIntArray
 {
@@ -10,33 +7,42 @@ namespace SortIntArray
     {
         static void Main(string[] args)
         {
-            int[] intArray = new int[10] { 10, 6, 7, 9, 1, 3, 4, 8, 5, 2};
+            /* program takes in a list of user input numbers and sorts them in ascending order
+               program uses BigInteger data type since the user can enter a big num which is too large for an int data type
+            */
 
-            SortTheIntArray(intArray);
+            Console.WriteLine("Please enter a list of numbers separated by spaces to sort in ascending order:");
+            var inputNums = Console.ReadLine().Split(' ');
+            BigInteger[] inputArray = Array.ConvertAll(inputNums, BigInteger.Parse);
+            SortInputArray(inputArray);
 
         }
 
-        static void SortTheIntArray(int[] na)
+        static void SortInputArray(BigInteger[] numArray)
         {
-          
-                for (int i = 0; i < na.Length; i++)
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                for (int j = 0; j < numArray.Length; j++)
                 {
-                    for (int j = 0; j < na.Length; j++)
+                    if (numArray[j] > numArray[i])
                     {
-                        if (na[j] > na[i])
-                        {
-                            int x = na[i];
-                            na[i] = na[j];
-                            na[j] = x;
-                        }
+                        BigInteger x = numArray[i];
+                        numArray[i] = numArray[j];
+                        numArray[j] = x;
                     }
                 }
-
-            for (int i = 0; i < na.Length; i++)
-            {
-                Console.WriteLine(na[i]);
             }
-            
+
+            Console.Write("The array sorted in ascending order is: ");
+
+            for (int i = 0; i < numArray.Length; i++)
+            {
+                Console.Write(numArray[i] + " ");
+            }
+
+            Console.ReadLine();
         }
+
+
     }
 }
